@@ -99,13 +99,13 @@ def simulate_autonomous_payment_gateway(fee_amount):
 if app_mode == "Sovereign Human Envelope (.HUMAN)":
     st.header("🎵 Sovereign Human Envelope Engine (SHEE)")
     st.write("Isolate and authenticate your creative human sweat equity from machine algorithms.")
-    st.markdown("**Public Processing Fee:** `$0.25 USD` per file stamp.")
+    st.markdown("**Public Processing Fee:** `$1.99 USD` per file stamp.")
     creator = st.text_input("Human Creator Name / Professional Alias", value="Martha Pauline Robichaw Wilson")
     location = st.text_input("Origin City / State / Jurisdiction", value="Las Vegas, Nevada")
     uploaded_file = st.file_uploader("Upload your raw media file (MP3, MP4, WAV)", type=["mp3", "mp4", "wav"])
     if st.button("Authorize Payment & Seal File"):
         if uploaded_file and creator and location:
-            if simulate_autonomous_payment_gateway(fee_amount=0.25):
+            if simulate_autonomous_payment_gateway(fee_amount=1.99):
                 engine = SovereignHumanEnvelopeEngine()
                 result = engine.generate_human_envelope(uploaded_file.name, creator, location)
                 st.success("🎉 Asset Successfully Secured. Your protected .HUMAN download receipt is ready below:")
@@ -116,7 +116,7 @@ if app_mode == "Sovereign Human Envelope (.HUMAN)":
 elif app_mode == "Automated Corporate Minutes (ACME)":
     st.header("📜 Automated Corporate Minutes Engine (ACME)")
     st.write("Format and lock in corporate resolutions to fully insulate your business asset veil.")
-    st.markdown("**Public Commercial Access Fee:** `$19.00 USD` single resolution generation.")
+    st.markdown("**Public Commercial Access Fee:** `$29.00 USD` single resolution generation.")
     company = st.text_input("Target Corporation / LLC Name", value="Laronn Legacy Holdings")
     director = st.text_input("Authorized Managing Director / Officer Name", value="Martha Pauline Robichaw Wilson")
     state = st.text_input("State of Incorporation", value="Las Vegas, Nevada")
@@ -124,7 +124,7 @@ elif app_mode == "Automated Corporate Minutes (ACME)":
     action_details = st.text_area("Describe the Corporate Resolution / Step taken by the business", value="Initialization of global production cloud server node.")
     if st.button("Authorize Payment & Generate Records"):
         if company and director and state and action_details:
-            if simulate_autonomous_payment_gateway(fee_amount=19.00):
+            if simulate_autonomous_payment_gateway(fee_amount=29.00):
                 acme = AutomatedCorporateMinutesEngine(company, director, state)
                 minutes = acme.compile_resolution(meeting_type, action_details)
                 st.success("✅ Corporate Minutes Cryptographically Sealed and Appended!")
@@ -135,7 +135,7 @@ elif app_mode == "Automated Corporate Minutes (ACME)":
 elif app_mode == "Autonomous Legal Persona (ALPL)":
     st.header("🛡️ Autonomous Legal Persona Layer (ALPL)")
     st.write("Deploy an autonomous proxy agent to scan incoming documents for administrative liabilities.")
-    st.markdown("**Public Corporate Audit Fee:** `$5.00 USD` per text scan.")
+    st.markdown("**Public Corporate Audit Fee:** `$9.99 USD` per text scan.")
     target_entity = st.text_input("Subject Business Entity Proxy", value="Laronn Legacy Holdings")
     manager = st.text_input("Executive Manager Agent Name", value="Martha Pauline Robichaw Wilson")
     base_jurisdiction = st.text_input("Operating Jurisdiction", value="Las Vegas, Nevada")
@@ -143,7 +143,7 @@ elif app_mode == "Autonomous Legal Persona (ALPL)":
     raw_text = st.text_area("Paste Incoming Administrative Notice / Contract Text Block Here", value="Notice to fictional individual agent parameters.")
     if st.button("Authorize Payment & Run Risk Scan"):
         if target_entity and manager and base_jurisdiction and doc_source and raw_text:
-            if simulate_autonomous_payment_gateway(fee_amount=5.00):
+            if simulate_autonomous_payment_gateway(fee_amount=9.99):
                 alpl = AutonomousLegalPersonaLayer(target_entity, manager, base_jurisdiction)
                 report = alpl.analyze_administrative_notice(doc_source, raw_text)
                 if report["Structural_Anomalies_Detected"]:
