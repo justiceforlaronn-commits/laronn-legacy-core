@@ -3,9 +3,49 @@ import time
 import hashlib
 import json
 import os
+import stripe
 
 # ========================================================
-# 🏛️ PROPRIETARY CORE ENGINE LOGIC BACKENDS (SELF-CONTAINED)
+# 🎨 HIGH-END VISUAL REFINEMENT & THEME INJECTION
+# ========================================================
+st.set_page_config(
+    page_title="Laronn Legacy Holdings Portal", 
+    page_icon="🏛️", 
+    layout="wide", # Widens the screen layout to look like a premium web app
+    initial_sidebar_state="expanded"
+)
+
+# Inject Custom CSS Styling to create an elite dark-luxury dashboard look
+st.markdown("""
+<style>
+    .reportview-container { background: #0E1117; }
+    .main .block-container { padding-top: 2rem; max-width: 1000px; }
+    h1 { color: #FFFFFF; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; }
+    h2, h3 { color: #F0F2F6; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    div.stButton > button:first-child {
+        background-color: #1E88E5; color: white; border-radius: 8px; 
+        border: none; padding: 10px 24px; font-weight: bold; width: 100%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;
+    }
+    div.stButton > button:first-child:hover { background-color: #1565C0; transform: translateY(-2px); }
+    .card-container {
+        background-color: #1D2430; padding: 24px; border-radius: 12px;
+        border: 1px solid #2D3748; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        margin-bottom: 24px;
+    }
+    .metric-box {
+        background: #111622; padding: 15px; border-radius: 8px;
+        border-left: 4px solid #1E88E5; text-align: center;
+    }
+</style>
+""", unsafe_allow_index=True)
+
+# Securely check for your background banking keys
+STRIPE_SECRET_KEY = st.secrets.get("STRIPE_SECRET_KEY", "sk_test_mock_placeholder_key")
+stripe.api_key = STRIPE_SECRET_KEY
+
+# ========================================================
+# 🏛️ PROPRIETARY CORE ENGINE LOGIC BACKENDS
 # ========================================================
 
 class SovereignHumanEnvelopeEngine:
@@ -24,9 +64,7 @@ class SovereignHumanEnvelopeEngine:
                 "Origin_Jurisdiction": location,
                 "Temporal_Witness_Stamp": readable_timestamp
             },
-            "Payload_Fingerprint": {
-                "Source_Media_Name": target_file
-            },
+            "Payload_Fingerprint": {"Source_Media_Name": target_file},
             "Sovereignty_Lock": {
                 "Proof_Of_Lived_Experience_Hash": proof_layer_hmac,
                 "File_Extension_Header": ".HUMAN"
@@ -73,81 +111,85 @@ class AutonomousLegalPersonaLayer:
         return audit_assessment
 
 # ========================================================
-# 🎨 VISUAL INTERACTIVE PORTAL DASHBOARD (FRONTEND)
+# 🏢 INSTITUTIONAL CONTAINER HEADER
 # ========================================================
-st.set_page_config(page_title="Laronn Legacy Holdings Public Portal", page_icon="🏛️", layout="centered")
+st.markdown("<h1>🏛️ Laronn Legacy Holdings</h1>", unsafe_allow_html=True)
+st.markdown("<p style='color:#A0AEC0; font-size:1.1rem; margin-top:-10px;'>Autonomous Private Asset & Sovereign Equity Architecture</p>", unsafe_allow_html=True)
+st.markdown("<p style='color:#718096; font-size:0.9rem;'>Executive Authority: Martha Pauline Robichaw Wilson | Las Vegas, Nevada Node</p>", unsafe_allow_html=True)
 
-st.title("🏛️ Laronn Legacy Holdings Portal")
-st.subheader("Autonomous Institutional Asset & Sovereign Equity Suite")
-st.write("Sovereign Network Architecture Registered to Managing Director: Martha Pauline Robichaw Wilson")
-st.markdown("---")
+# 📊 Visual Premium Pricing Cards Layout
+st.markdown("### 💎 Enterprise Pricing Architecture")
+m_col1, m_col2, m_col3 = st.columns(3)
+with m_col1:
+    st.markdown("<div class='metric-box'><b style='color:#A0AEC0;'>🎵 .HUMAN Node</b><br><h3 style='margin:5px 0; color:#FFF;'>$1.99</h3><span style='font-size:0.8rem; color:#718096;'>Per File Stamp</span></div>", unsafe_allow_html=True)
+with m_col2:
+    st.markdown("<div class='metric-box'><b style='color:#A0AEC0;'>📜 ACME Ledger</b><br><h3 style='margin:5px 0; color:#FFF;'>$29.00</h3><span style='font-size:0.8rem; color:#718096;'>Per Resolution</span></div>", unsafe_allow_html=True)
+with m_col3:
+    st.markdown("<div class='metric-box'><b style='color:#A0AEC0;'>🛡️ ALPL Proxy</b><br><h3 style='margin:5px 0; color:#FFF;'>$9.99</h3><span style='font-size:0.8rem; color:#718096;'>Per Risk Scan</span></div>", unsafe_allow_html=True)
 
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Setup Navigation Menu inside the sidebar housing layout
+st.sidebar.markdown("### 🏢 Control Console")
 app_mode = st.sidebar.selectbox(
-    "Select Utility Node to Launch",
+    "Select System Engine Node",
     ["Sovereign Human Envelope (.HUMAN)", "Automated Corporate Minutes (ACME)", "Autonomous Legal Persona (ALPL)"]
 )
 
-def simulate_autonomous_payment_gateway(fee_amount):
-    st.write(f"💳 **Secure Commerce Portal Redirect...**")
-    st.write(f"Processing a digital toll of **${fee_amount:.2f}** to Laronn Legacy Holdings.")
-    payment_success = st.checkbox("Simulate Successful Credit Card / Stripe Transaction Clearance", value=True)
-    if payment_success:
-        st.success(f"💰 Transaction Cleared. ${fee_amount:.2f} securely deposited to Trust Ledger.")
-        return True
-    return False
+# Pull parameters checking for approved financial transactions
+query_params = st.context.query_parameters
+is_success = query_params.get("session", [None]) == "success"
 
+def create_true_stripe_checkout_session(product_name, fee_amount):
+    try:
+        amount_in_cents = int(fee_amount * 100)
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {'name': product_name},
+                    'unit_amount': amount_in_cents,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url="https://streamlit.app",
+            cancel_url="https://streamlit.app",
+        )
+        return session.url
+    except Exception as e:
+        st.error(f"Gateway Interception Error: {str(e)}")
+        return None
+
+# ==========================================
+# UI RENDER NODE 1: SOVEREIGN HUMAN ENVELOPE
+# ==========================================
 if app_mode == "Sovereign Human Envelope (.HUMAN)":
-    st.header("🎵 Sovereign Human Envelope Engine (SHEE)")
-    st.write("Isolate and authenticate your creative human sweat equity from machine algorithms.")
-    st.markdown("**Public Processing Fee:** `$1.99 USD` per file stamp.")
+    st.markdown("<div class='card-container'><h3>🎵 Sovereign Human Envelope Engine (SHEE)</h3><p style='color:#A0AEC0; font-size:0.9rem;'>Isolate and authenticate creative human sweat equity from algorithmic machine loops.</p></div>", unsafe_allow_html=True)
+    
     creator = st.text_input("Human Creator Name / Professional Alias", value="Martha Pauline Robichaw Wilson")
     location = st.text_input("Origin City / State / Jurisdiction", value="Las Vegas, Nevada")
-    uploaded_file = st.file_uploader("Upload your raw media file (MP3, MP4, WAV)", type=["mp3", "mp4", "wav"])
-    if st.button("Authorize Payment & Seal File"):
-        if uploaded_file and creator and location:
-            if simulate_autonomous_payment_gateway(fee_amount=1.99):
-                engine = SovereignHumanEnvelopeEngine()
-                result = engine.generate_human_envelope(uploaded_file.name, creator, location)
-                st.success("🎉 Asset Successfully Secured. Your protected .HUMAN download receipt is ready below:")
-                st.json(result)
+    uploaded_file = st.file_uploader("Upload raw media asset library (MP3, MP4, WAV)", type=["mp3", "mp4", "wav"])
+    
+    if is_success:
+        st.success("💳 Secure Stripe Verification Cleared! Access Unlocked.")
+        if st.button("Generate Protected .HUMAN File Asset"):
+            engine = SovereignHumanEnvelopeEngine()
+            file_title = uploaded_file.name if uploaded_file else "sovereign_creative_track.mp3"
+            result = engine.generate_human_envelope(file_title, creator, location)
+            st.json(result)
+            st.balloons()
+            
+    elif st.button("Authorize Credit Card Payment & Link Gateway"):
+        if creator and location:
+            checkout_url = create_true_stripe_checkout_session("Sovereign Human Envelope Signature", 1.99)
+            if checkout_url:
+                st.markdown(f"📦 **[Click Here to Open Secure Credit Card Form]({checkout_url})**")
         else:
-            st.warning("Please complete all text fields and upload a valid media file.")
+            st.warning("Please verify required field variables to clear the billing bridge.")
 
+# ==========================================
+# UI RENDER NODE 2: AUTOMATED CORPORATE MINUTES
+# ==========================================
 elif app_mode == "Automated Corporate Minutes (ACME)":
-    st.header("📜 Automated Corporate Minutes Engine (ACME)")
-    st.write("Format and lock in corporate resolutions to fully insulate your business asset veil.")
-    st.markdown("**Public Commercial Access Fee:** `$29.00 USD` single resolution generation.")
-    company = st.text_input("Target Corporation / LLC Name", value="Laronn Legacy Holdings")
-    director = st.text_input("Authorized Managing Director / Officer Name", value="Martha Pauline Robichaw Wilson")
-    state = st.text_input("State of Incorporation", value="Las Vegas, Nevada")
-    meeting_type = st.selectbox("Meeting Classification Document", ["Special Meeting of the Board of Directors", "Annual Meeting of the Board of Trustees"])
-    action_details = st.text_area("Describe the Corporate Resolution / Step taken by the business", value="Initialization of global production cloud server node.")
-    if st.button("Authorize Payment & Generate Records"):
-        if company and director and state and action_details:
-            if simulate_autonomous_payment_gateway(fee_amount=29.00):
-                acme = AutomatedCorporateMinutesEngine(company, director, state)
-                minutes = acme.compile_resolution(meeting_type, action_details)
-                st.success("✅ Corporate Minutes Cryptographically Sealed and Appended!")
-                st.json(minutes)
-        else:
-            st.warning("All business registration text fields are required.")
-
-elif app_mode == "Autonomous Legal Persona (ALPL)":
-    st.header("🛡️ Autonomous Legal Persona Layer (ALPL)")
-    st.write("Deploy an autonomous proxy agent to scan incoming documents for administrative liabilities.")
-    st.markdown("**Public Corporate Audit Fee:** `$9.99 USD` per text scan.")
-    target_entity = st.text_input("Subject Business Entity Proxy", value="Laronn Legacy Holdings")
-    manager = st.text_input("Executive Manager Agent Name", value="Martha Pauline Robichaw Wilson")
-    base_jurisdiction = st.text_input("Operating Jurisdiction", value="Las Vegas, Nevada")
-    doc_source = st.text_input("Document Origin / Sender Name", value="External Commercial Entity Notice")
-    raw_text = st.text_area("Paste Incoming Administrative Notice / Contract Text Block Here", value="Notice to fictional individual agent parameters.")
-    if st.button("Authorize Payment & Run Risk Scan"):
-        if target_entity and manager and base_jurisdiction and doc_source and raw_text:
-            if simulate_autonomous_payment_gateway(fee_amount=9.99):
-                alpl = AutonomousLegalPersonaLayer(target_entity, manager, base_jurisdiction)
-                report = alpl.analyze_administrative_notice(doc_source, raw_text)
-                if report["Structural_Anomalies_Detected"]:
-                    st.error("⚠️ CRITICAL ANOMALY FILTERS TRIGGERED: VOID LIABILITY VECTOR")
-                else:
-                    st.success("🛡️ Scan Complete. No Corporate Veil Piercing Flags Found.")
-                st.json(report)
