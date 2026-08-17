@@ -1,4 +1,4 @@
-import streamlit as st
+ import streamlit as st
 import time
 import hashlib
 import json
@@ -132,4 +132,4 @@ elif app_mode == "Autonomous Legal Persona (ALPL)":
                         st.success("🛡️ Scan Complete. No Corporate Veil Piercing Flags Found.")
                     st.json(report)
         else:
-            st.warning("Please input the target text notice and proxy metadata to run the compliance sentinel
+            st.warning("Please input the target text notice and proxy metadata to run the compliance sentinel.")
